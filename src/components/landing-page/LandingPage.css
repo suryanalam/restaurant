@@ -1,0 +1,32 @@
+.landing-page-bg{
+    min-height: 88svh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.left-div{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.left-div button{
+    margin: 1rem 0;
+}
+
+.title-span{
+    font-size: 3.25vw;
+    letter-spacing: 2px;
+    color: var(--black);
+    text-transform: uppercase;
+    -webkit-text-stroke: 1px var(--orange); 
+}
+
+.desc-text{
+    width:75%;
+    line-height: 3vh;
+    text-align: justify;
+}

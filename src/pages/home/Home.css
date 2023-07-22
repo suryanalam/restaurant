@@ -1,0 +1,30 @@
+.home-bg{
+    width: 100svw;
+    min-height: 88svh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color:var(--white);
+    position: relative;
+}
+
+.home-left-div{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.home-heading-span{
+    font-size: 3.25vw;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    -webkit-text-stroke: 1px var(--orange);
+    color: var(--black); 
+}
+
+.header-body-text{
+    width:75%;
+    text-align: justify;
+}

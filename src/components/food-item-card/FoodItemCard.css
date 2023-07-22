@@ -1,0 +1,48 @@
+.food-card {
+    padding: 1rem;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    border-radius: 8px;
+    border: 1px solid var(--white);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .food-card:hover {
+    box-shadow: 0 4px 8px var(--white);
+  }
+  
+  .food-image-div img{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .food-details h2 {
+    margin: 0;
+    margin-bottom: 8px;
+    font-size: 18px;
+  }
+  
+  .food-details p {
+    margin: 0;
+    color: #666;
+  }
+  
+  .food-details button {
+    background-color: var(--orange);
+    color: var(--black);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-top: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .food-details button:hover {
+    background-color: var(--orange);
+  }  
