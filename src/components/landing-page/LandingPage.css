@@ -20,9 +20,8 @@
 .title-span{
     font-size: 3.25vw;
     letter-spacing: 2px;
-    color: var(--black);
     text-transform: uppercase;
-    -webkit-text-stroke: 1px var(--orange); 
+    color:var(--orange);
 }
 
 .desc-text{

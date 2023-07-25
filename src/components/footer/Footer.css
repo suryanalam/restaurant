@@ -1,12 +1,13 @@
 .Footer {
 	bottom: 0;
 	min-height: 40vh;
-	color: var(--white);
-	background-color: var(--dark-black);
+	background-color: var(--white);
+	color: var(--dark-black);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+
 }
 
 .Footer > hr {
@@ -37,21 +38,15 @@
 	gap: 1rem;
 }
 
-.outer-div2 > div > a,
-.outer-div2 > div > p {
-	color: var(--grey);
+.outer-div2 > div > a, .outer-div2 > div > p {
 	text-decoration: none;
-}
-
-.outer-div2 > div > a:hover {
-	color: var(--white);
+	color:inherit;
 }
 
 .footer-details-div {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
-	color: var(--grey);
 }
 
 .details-heading {
@@ -64,7 +59,7 @@
 
 .details-contact-number,
 .details-mail-id {
-	color: var(--grey);
+	color: inherit;
 	text-decoration: none;
 }
 
@@ -81,40 +76,39 @@
 }
 
 .social-media-links > a {
-	color: var(--grey);
 	text-decoration: none;
-}
-
-.social-media-links > a:hover {
-	color: var(--white);
+	color:inherit;
 }
 
 .footer-subscribe-div {
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
 }
 
 .subscribe-input {
 	outline: 0;
 	border: 0;
-	padding: 0.5rem;
-	width: 25vw;
-	height: 3vh;
-	border: 2px solid var(--grey);
+	padding: 1rem;
+	width: 300px;
+	border: 2px solid var(--dark-black);
 	background-color: inherit;
-	color: var(--white);
+	color:var(--dark-black);
 }
 
 .subscribe-btn {
-	padding: 0.5rem;
-	width: 6vw;
-	height: 5.5vh;
-	border: 2px solid var(--grey);
-	color: var(--dark-black);
-	background-color: var(--grey);
+	padding: 0.9rem;
+	color: invert;
+	background-color: var(--dark-black);
+	border-color:transparent; 
 	cursor: pointer;
-	font-weight: 600;
+	font-weight: 500;
+	font-size: 1rem;
+	letter-spacing: 1px;
+}
+
+.social-media-div h3, .footer-subscribe-div h3{
+	color: var(--orange);
+	font-weight: 700;
 }
 
 @media only screen and (max-width: 426px) {

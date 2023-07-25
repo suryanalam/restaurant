@@ -27,18 +27,20 @@ const Menu = () => {
       <Header />
       {isLoading ? (
         <div className="loading-div">
-          <ClipLoader color="#ffffff" loading={isLoading} />
+          <ClipLoader color="#000000" loading={isLoading} />
         </div>
       ) : (
         <section className="menu-bg">
           {menuItems.map((item,index) => 
           (
             <FoodItemCard 
+            id={item._id}
             image={item.image_src}
             name={item.name}
             price={item.price}
-            key={index}
+            index={index}
             item={item} 
+            key={index}
             />
           ))}
         </section>

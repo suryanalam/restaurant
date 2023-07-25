@@ -1,57 +1,66 @@
-import React, { useContext } from "react";
-//import { useCart } from "react-use-cart";
+import React, { useContext, useEffect } from "react";
 import "./FoodItemCard.css";
 
 import { CustomContext } from "../../contexts/CustomContext";
 
-const FoodItemCard = ({image,name,price,key}) => {
+const FoodItemCard = ({item, id, image, name, price}) => {
 
-  //const { addItem } = useCart();
-  //console.log(item.id, 'from food item card');
-  const { menuItems, cartItems, setCartItems } = useContext(CustomContext);
+  const { cartItems, setCartItems } = useContext(CustomContext);
 
-  
-  const addToCart = async (e) => {
+  const cartData = JSON.parse(localStorage.getItem('cartData'))
 
-    console.log(key);
+  const addToCart = (e) => {
 
-    const itemID = e.target.id;
-    console.log("food item id from add to cart:", itemID);
+    if(cartData){
 
-    //returns an object of item details if item already exists in cart:
-    const itemExist = cartItems.find((item) => item._id === itemID);
+      console.log('cartData is available in localstorage');
 
-    //increase the quantity of item if it item exists in cart:
-    if (itemExist) {
-      const updatedCart = cartItems.map((item) =>
-        item._id === itemID ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      localStorage.setItem("CartData", JSON.stringify(updatedCart));
+        let itemExist = cartItems.find((item)=>{
+          if(item._id === id){
+            item.quantity += 1;
+            return item;
+          }else{
+            return null;
+          }
+        })
+
+        console.log(itemExist,'itemExist in cart')
+
+        if(itemExist !== undefined){
+          console.log('updating item in cart')
+          let updatedCart = [...cartItems];
+          localStorage.setItem('cartData',JSON.stringify(updatedCart))
+        }
+
+        else{
+          console.log('creating new item in cart')
+          let newCartItem = item;
+          newCartItem.quantity = 1;
+          console.log(newCartItem,'newCartItem');
+          let updatedCart = [...cartItems, newCartItem];
+          console.log(updatedCart,'updatedCart');
+          setCartItems(updatedCart);
+          localStorage.setItem('cartData',JSON.stringify(updatedCart));
+        }
+
     }
 
-    //add new item to cart if it doesn't exist in cart:
-    else {
-      const itemData = menuItems.find((item) => item._id === itemID);
-      // fetching the details of item from menu:
-      console.log("itemData from menuItems", itemData);
-
-      let newCartItem;
-      if (itemData) {
-        newCartItem = {
-          _id: itemData._id,
-          image: itemData.image_src,
-          name: itemData.name,
-          price: itemData.price,
-          quantity: 1,
-        };
-      }
-      setCartItems([...cartItems, newCartItem]);
-      localStorage.setItem(
-        "CartData",
-        JSON.stringify([...cartItems, newCartItem])
-      );
+    else{
+      console.log('adding first item when no data in localstorage')
+      let newCartItem = item;
+      newCartItem.quantity = 1;
+      console.log(newCartItem,'newCartItem');
+      let updatedCart = [...cartItems, newCartItem];
+      console.log(updatedCart,'updatedCart');
+      setCartItems(updatedCart);
+      localStorage.setItem('cartData',JSON.stringify(updatedCart));
     }
+
   };
+
+  useEffect(() => {
+    console.log(cartData,'cartData from localstorage');
+  },[cartData])
 
   
   return (

@@ -3,7 +3,7 @@ import './FallbackUI.css'
 const FallbackUI = () => {
   return (
     <div className='fallback-bg'>
-      <p className='loading-text'>Loading...</p>
+      <p className='loading-text'>Please Wait...</p>
     </div>
   )
 }

@@ -1,42 +1,62 @@
-import React,{useContext} from "react";
+import React,{useContext, useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import "./Cart.css";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import { CustomContext } from "../../contexts/CustomContext";
-//import { useCart } from "react-use-cart";
 
 const Cart = () => {
-  /*const {
-    items,
-    isEmpty,
-    totalUniqueItems,
-    totalItems,
-    cartTotal,
-    updateItemQuantity,
-    removeItem,
-    emptyCart,
-  } = useCart();*/
 
   const navigate = useNavigate();
-  let CartData = JSON.parse(localStorage.getItem("CartData"));
+  const [finalPrice, setFinalPrice] = useState(0);
   const {cartItems, setCartItems} = useContext(CustomContext);
-  
+  const cartData = JSON.parse(localStorage.getItem('cartData'));
+  console.log(cartData, 'cartData in cart')
+
   const handleRemove = (e) => {
-    console.log(e.target.id);
-    const itemID = e.target.id;
-    const updatedCart = cartItems.filter((item) => item._id !== itemID);
-    console.log(updatedCart, 'from updated cart');
-    setCartItems(updatedCart)
-    localStorage.setItem("CartData", JSON.stringify(cartItems));
+      console.log(e.target.id,'id of item to be removed')
+      const removeId = e.target.id;
+      let updatedCart = cartItems.filter((item)=>{
+        if(item._id !== removeId){
+          return item;
+        }
+        return null;
+      })
+      console.log(updatedCart,'updatedCart after removing item')
+      setCartItems(updatedCart);
+      localStorage.setItem('cartData',JSON.stringify(updatedCart));
   }
+
+  const calcTotalPrice = async () => {
+    let prices = await cartData.map((currentProduct) => {
+      const { price, quantity } = currentProduct;
+      return quantity*price;
+    })
+
+    const totalPrice = prices.reduce((sum, price) => sum + price, 0);
+    console.log(totalPrice,'finalPrice')
+    setFinalPrice(totalPrice)
+  }
+  
+  
+  const handlePay = () => {
+    alert('payment done successfully');
+    localStorage.removeItem('cartData');
+    navigate('/menu')
+  }
+
+  useEffect(()=>{
+    if(cartData){
+      calcTotalPrice();
+    }
+  })
 
   return (
     <>
       <Header />
       <div className="cart-bg">
         <button className="logout-btn" onClick={()=>navigate('/menu')}>Go to Menu</button>
-        {!cartItems.length > 0 ? (
+        { !cartData ? (
           <div className="cart-empty-div">
             <img
               src={process.env.PUBLIC_URL + "assets/images/empty-cart.png"}
@@ -47,16 +67,16 @@ const Cart = () => {
         ) : (
           <div className="cart-bg-div">
             <div className="cart-items-div-bg">
-              {cartItems.map(({ image, name, price, quantity},index) => (
-                <div className="cart-item-div" key={index}>
+              {cartData.map(({ _id, image_src, name, price, quantity}) => (
+                <div className="cart-item-div" key={_id}>
                   <div className="cart-item-img-div">
-                    <img src={image} alt={"product-img"} />
+                    <img src={image_src} alt={"product-img"} />
                   </div>
                   <div className="cart-item-details">
                     <h4 className="cart-item-name">Name: {name}</h4>
                     <p className="cart-item-price">Price: ${price}</p>
                     <p className="cart-item-quantity">Quantity: {quantity}</p>
-                    <button className="remove-btn" onClick={handleRemove}>Remove</button>
+                    <button className="remove-btn" onClick={handleRemove} id={_id}>Remove</button>
                   </div>
                 </div>
               ))}
@@ -66,19 +86,13 @@ const Cart = () => {
                 <h3 className="cart-summary-title">Cart Summary</h3>
                 <div className="cart-summary-details-div">
                   <div className="order-details">
-                    No. of Items:<span>{cartItems.length}</span>
+                    No. of Items:<span>{cartData.length}</span>
                   </div>
                   <div className="order-details">
-                    Subtotal:<span>$550</span>
-                  </div>
-                  <div className="order-details">
-                    Delivery Charges:<span>$5</span>
-                  </div>
-                  <div className="order-details">
-                    Total Price:<span>$550</span>
+                    Total Price:<span>${finalPrice}</span>
                   </div>
                 </div>
-                <button className="form-lg-btn">Pay Now</button>
+                <button className="remove-btn" onClick={handlePay}>Pay Now</button>
               </div>
             </aside>
           </div>

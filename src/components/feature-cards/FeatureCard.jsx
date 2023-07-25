@@ -12,7 +12,7 @@ const FeatureCard = ({ id, icon, name, desc }) => {
         <div className="feature-icons-div">
           <RocketLaunchIcon
             className="feature-icons"
-            sx={{ color: "orange", fontSize: 50 }}
+            sx={{ color: "var(--orange)", fontSize: 50 }}
           />
         </div>
         <h4 className="feature-name">Fast Delivery</h4>
@@ -22,7 +22,7 @@ const FeatureCard = ({ id, icon, name, desc }) => {
         <div className="feature-icons-div">
           <RestaurantMenuIcon
             className="feature-icons"
-            sx={{ color: "orange", fontSize: 50 }}
+            sx={{ color: "var(--orange)", fontSize: 50 }}
           />
         </div>
         <h4 className="feature-name">Fresh Food</h4>
@@ -32,7 +32,7 @@ const FeatureCard = ({ id, icon, name, desc }) => {
         <div className="feature-icons-div">
           <PaidIcon
             className="feature-icons"
-            sx={{ color: "orange", fontSize: 50 }}
+            sx={{ color: "var(--orange)", fontSize: 50 }}
           />
         </div>
         <h4 className="feature-name">Feasible Prices</h4>
