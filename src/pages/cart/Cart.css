@@ -2,6 +2,19 @@
   padding: 2rem;
 }
 
+.cart-bg > button {
+  margin-left: 1rem;
+  background-color: var(--white);
+  border-color: var(--white);
+}
+
+.cart-bg > button:hover{
+  color: var(--white);
+  background-color: var(--black);
+  border-color: var(--white);
+}
+
+
 .cart-empty-div {
   min-height: 85vh;
   display: flex;

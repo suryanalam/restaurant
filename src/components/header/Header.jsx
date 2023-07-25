@@ -16,6 +16,7 @@ const Header = () => {
     console.log("token from localstorage", localStorage.getItem("token"));
     navigate("/login");
   };
+
   return (
     <header className="header-bg">
       <section className="header-logo-div">
@@ -37,7 +38,7 @@ const Header = () => {
         <p>Welcome,{payload.name}</p>
         <div className="header-cart-icon">
           <ShoppingCartRoundedIcon sx={{ fontSize: 25 }} 
-            onClick={() => navigate('/cart')}
+            onClick={()=>navigate("/cart")}
           />
         </div>
         <button className="logout-btn" onClick={handleLogout} >

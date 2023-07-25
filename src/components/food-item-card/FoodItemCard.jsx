@@ -1,12 +1,20 @@
 import React, { useContext } from "react";
+//import { useCart } from "react-use-cart";
 import "./FoodItemCard.css";
 
 import { CustomContext } from "../../contexts/CustomContext";
 
-const FoodItemCard = ({ item }) => {
+const FoodItemCard = ({image,name,price,key}) => {
+
+  //const { addItem } = useCart();
+  //console.log(item.id, 'from food item card');
   const { menuItems, cartItems, setCartItems } = useContext(CustomContext);
 
+  
   const addToCart = async (e) => {
+
+    console.log(key);
+
     const itemID = e.target.id;
     console.log("food item id from add to cart:", itemID);
 
@@ -45,16 +53,16 @@ const FoodItemCard = ({ item }) => {
     }
   };
 
-  let { image_src, name, price } = item;
+  
   return (
     <div className="food-card">
       <div className="food-image-div">
-        <img src={image_src} alt={name} />
+        <img src={image} alt={name} />
       </div>
       <div className="food-details">
         <h2>{name}</h2>
         <p>${price}</p>
-        <button onClick={addToCart} id={item._id}>
+        <button onClick={addToCart} >
           Add to Cart
         </button>
       </div>

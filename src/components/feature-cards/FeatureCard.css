@@ -12,7 +12,7 @@
 }
 
 .feature-card-bg:hover{
-    background-color: var(--white);
+    background-color: var(--grey);
     color: var(--dark-black);
     transition: 0.5s;
 }

@@ -3,7 +3,7 @@ import axios from "axios";
 import { CustomContext } from "../contexts/CustomContext";
 
 export const useFetch = (url) => {
-  const {setMenuItems } = useContext(CustomContext);
+  const {setMenuItems} = useContext(CustomContext);
 
   useEffect(() => {
     const fetchData = async () => {

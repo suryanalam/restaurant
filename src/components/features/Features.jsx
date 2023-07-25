@@ -6,7 +6,7 @@ import './Features.css'
 const Features = () => {
   return (
     <section className='features-bg'>
-        <h3>Things that make us special !!</h3>
+        <h3>Things that makes us special !!</h3>
         <div className='features-div'>
           <FeatureCard />
         </div>

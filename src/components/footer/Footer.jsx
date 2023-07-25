@@ -33,7 +33,7 @@ function Footer() {
 						<h4>Connect with us:</h4>
 					</div>
 					<div className="social-media-links">
-						<a href="#Facebook">
+						<a href="https://www.facebook.com/">
 							<FaFacebook />
 							&nbsp;Facebook
 						</a>
@@ -41,11 +41,11 @@ function Footer() {
 							<AiFillInstagram />
 							&nbsp;Instagram
 						</a>
-						<a href="#Twitte">
+						<a href="https://www.twitter.com/">
 							<AiFillTwitterCircle />
 							&nbsp;Twitter
 						</a>
-						<a href="#Telegram">
+						<a href="https://www.telegram.com/">
 							<FaTelegram />
 							&nbsp;Telegram
 						</a>

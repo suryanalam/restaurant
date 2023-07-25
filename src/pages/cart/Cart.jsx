@@ -1,10 +1,24 @@
 import React,{useContext} from "react";
+import { useNavigate } from "react-router-dom";
 import "./Cart.css";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import { CustomContext } from "../../contexts/CustomContext";
+//import { useCart } from "react-use-cart";
 
 const Cart = () => {
+  /*const {
+    items,
+    isEmpty,
+    totalUniqueItems,
+    totalItems,
+    cartTotal,
+    updateItemQuantity,
+    removeItem,
+    emptyCart,
+  } = useCart();*/
+
+  const navigate = useNavigate();
   let CartData = JSON.parse(localStorage.getItem("CartData"));
   const {cartItems, setCartItems} = useContext(CustomContext);
   
@@ -21,7 +35,8 @@ const Cart = () => {
     <>
       <Header />
       <div className="cart-bg">
-        {CartData.length <= 0 ? (
+        <button className="logout-btn" onClick={()=>navigate('/menu')}>Go to Menu</button>
+        {!cartItems.length > 0 ? (
           <div className="cart-empty-div">
             <img
               src={process.env.PUBLIC_URL + "assets/images/empty-cart.png"}
@@ -32,8 +47,8 @@ const Cart = () => {
         ) : (
           <div className="cart-bg-div">
             <div className="cart-items-div-bg">
-              {CartData.map(({ image, name, price, quantity, _id }) => (
-                <div className="cart-item-div" key={_id}>
+              {cartItems.map(({ image, name, price, quantity},index) => (
+                <div className="cart-item-div" key={index}>
                   <div className="cart-item-img-div">
                     <img src={image} alt={"product-img"} />
                   </div>
@@ -41,7 +56,7 @@ const Cart = () => {
                     <h4 className="cart-item-name">Name: {name}</h4>
                     <p className="cart-item-price">Price: ${price}</p>
                     <p className="cart-item-quantity">Quantity: {quantity}</p>
-                    <button className="remove-btn" id ={_id} onClick={handleRemove}>Remove</button>
+                    <button className="remove-btn" onClick={handleRemove}>Remove</button>
                   </div>
                 </div>
               ))}
@@ -51,7 +66,7 @@ const Cart = () => {
                 <h3 className="cart-summary-title">Cart Summary</h3>
                 <div className="cart-summary-details-div">
                   <div className="order-details">
-                    No. of Items:<span>{CartData.length}</span>
+                    No. of Items:<span>{cartItems.length}</span>
                   </div>
                   <div className="order-details">
                     Subtotal:<span>$550</span>
