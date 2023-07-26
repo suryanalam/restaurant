@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./auth.css";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -33,16 +34,18 @@ const Login = () => {
 
       console.log("login data from response", loginData);
 
-      if (loginData.data.token) {
+      if (loginData?.data.token) {
         console.log("token from response", loginData.data.token);
         localStorage.setItem("token", loginData.data.token);
+        toast.success("Logged in successfully");
         console.log("token from localstorage", localStorage.getItem("token"));
         navigate("/");
       } else {
-        alert("Enter the required fields");
+        toast.warning("Enter mail and password !!");
       }
     } catch (err) {
-      alert(err.response.data.message);
+      //alert(err.response.data.message);
+      toast.error(err.response.data.message);
     }
   };
   return (

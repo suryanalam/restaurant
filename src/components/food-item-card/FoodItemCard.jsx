@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from "react";
+import { toast } from 'react-toastify';
 import "./FoodItemCard.css";
 
 import { CustomContext } from "../../contexts/CustomContext";
 
 const FoodItemCard = ({item, id, image, name, price}) => {
 
-  const { cartItems, setCartItems } = useContext(CustomContext);
+  const { cartItems, setCartItems} = useContext(CustomContext);
 
   const cartData = JSON.parse(localStorage.getItem('cartData'))
 
@@ -30,6 +31,7 @@ const FoodItemCard = ({item, id, image, name, price}) => {
           console.log('updating item in cart')
           let updatedCart = [...cartItems];
           localStorage.setItem('cartData',JSON.stringify(updatedCart))
+          toast.success('Item quantity updated in cart');
         }
 
         else{
@@ -41,6 +43,7 @@ const FoodItemCard = ({item, id, image, name, price}) => {
           console.log(updatedCart,'updatedCart');
           setCartItems(updatedCart);
           localStorage.setItem('cartData',JSON.stringify(updatedCart));
+          toast.success('Item added to cart');
         }
 
     }
@@ -54,6 +57,7 @@ const FoodItemCard = ({item, id, image, name, price}) => {
       console.log(updatedCart,'updatedCart');
       setCartItems(updatedCart);
       localStorage.setItem('cartData',JSON.stringify(updatedCart));
+      toast.success('Item added to cart');
     }
 
   };

@@ -4,6 +4,7 @@ import "./Cart.css";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import { CustomContext } from "../../contexts/CustomContext";
+import { toast } from "react-toastify";
 
 const Cart = () => {
 
@@ -25,6 +26,7 @@ const Cart = () => {
       console.log(updatedCart,'updatedCart after removing item')
       setCartItems(updatedCart);
       localStorage.setItem('cartData',JSON.stringify(updatedCart));
+      toast.success('Item removed from cart');
   }
 
   const calcTotalPrice = async () => {
@@ -40,8 +42,8 @@ const Cart = () => {
   
   
   const handlePay = () => {
-    alert('payment done successfully');
     localStorage.removeItem('cartData');
+    toast.success('Payment done successfully');
     navigate('/menu')
   }
 
@@ -56,7 +58,7 @@ const Cart = () => {
       <Header />
       <div className="cart-bg">
         <button className="logout-btn" onClick={()=>navigate('/menu')}>Go to Menu</button>
-        { !cartData ? (
+        { !cartData?.length > 0 ? (
           <div className="cart-empty-div">
             <img
               src={process.env.PUBLIC_URL + "assets/images/empty-cart.png"}
@@ -72,7 +74,7 @@ const Cart = () => {
                   <div className="cart-item-img-div">
                     <img src={image_src} alt={"product-img"} />
                   </div>
-                  <div className="cart-item-details">
+                  <div className="cart-item-details-div">
                     <h4 className="cart-item-name">Name: {name}</h4>
                     <p className="cart-item-price">Price: ${price}</p>
                     <p className="cart-item-quantity">Quantity: {quantity}</p>

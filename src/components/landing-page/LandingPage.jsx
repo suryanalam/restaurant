@@ -10,7 +10,7 @@ const LandingPage = () => {
         <h2>
           Get your food, <br />
           <span className="title-span" data-text="fresh and tasty !!">
-            fresh and tasty ...
+            fresh and tasty !!
           </span>
         </h2>
         <p className="desc-text">

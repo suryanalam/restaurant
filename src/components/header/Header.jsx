@@ -1,6 +1,7 @@
 import "./Header.css";
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 
 const Header = () => {
@@ -13,6 +14,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     await localStorage.removeItem("token");
+    toast.success("Logged out successfully");
     console.log("token from localstorage", localStorage.getItem("token"));
     navigate("/login");
   };

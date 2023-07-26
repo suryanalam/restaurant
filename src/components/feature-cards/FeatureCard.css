@@ -1,7 +1,7 @@
 .feature-card-bg{
-    padding: 2rem 1rem;
-    width: 20vw;
-    height: 30vh; 
+    padding: 1rem;
+    width: 25%;
+    height:200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,11 +10,10 @@
     color: var(--white);
     background-color:var(--dark-black);
     box-shadow:
-  2.3px 6.8px 8px rgba(0, 0, 0, 0.13),
-  7.8px 22.8px 26.8px rgba(0, 0, 0, 0.077),
-  35px 102px 120px rgba(0, 0, 0, 0.053)
-;
-transition: all 0.5s ease-in-out;
+        2.3px 6.8px 8px rgba(0, 0, 0, 0.13),
+        7.8px 22.8px 26.8px rgba(0, 0, 0, 0.077),
+        35px 102px 120px rgba(0, 0, 0, 0.053);
+    transition: all 0.5s ease-in-out;
 }
 
 .feature-card-bg:hover{

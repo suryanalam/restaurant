@@ -1,6 +1,9 @@
 import "./App.css";
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import PrivateRoutes from "./PrivateRoutes";
 import FallbackUI from "./components/fallback UI/FallbackUI";
 
@@ -11,9 +14,12 @@ const Cart = React.lazy(() => import("./pages/cart/Cart"));
 const Login = React.lazy(() => import("./pages/auth/Login"));
 const Signup = React.lazy(() => import("./pages/auth/Signup"));
 
+
+
 function App() {
   return (
     <div className="App">
+      <ToastContainer />
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route
