@@ -79,11 +79,19 @@
   font-weight: 600;
 }
 
-.cart-item-price, .cart-item-quantity {
+.cart-item-price, .cart-item-quantity-div {
   margin: 0;
   margin-bottom: 1rem;
   font-size: 1rem;
   font-weight: 500;
+}
+
+.cart-item-quantity-div button{
+  padding: 0.25rem 0.5rem;
+  margin: 0 0.5rem;
+  cursor:pointer;
+  border: 1px solid var(--orange);
+  background-color: transparent;
 }
 
 .remove-btn {

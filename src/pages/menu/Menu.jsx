@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Menu.css";
 import ClipLoader from "react-spinners/ClipLoader";
 
+import categories from "../../utils/categories";
+import CategoryCard from "../../components/category-card/CategoryCard";
 import FoodItemCard from "../../components/food-item-card/FoodItemCard";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
@@ -11,16 +13,16 @@ import { useFetch } from "../../custom hooks/useFetch";
 
 const Menu = () => {
   const [isLoading, setIsLoading] = useState(true);
-  
-  useFetch("https://food-api-98fq.onrender.com/api/v1/food/getItems");
 
-  const { menuItems } = useContext(CustomContext);
+  useFetch("https://notes-app-0wxo.onrender.com/food");
+
+  const { menuItems, filteredMenu } = useContext(CustomContext);
 
   useEffect(() => {
-    if (menuItems.length > 0) {
+    if (menuItems.length > 0 || filteredMenu.length > 0) {
       setIsLoading(false);
     }
-  },[menuItems])
+  }, [menuItems, filteredMenu]);
 
   return (
     <>
@@ -31,18 +33,39 @@ const Menu = () => {
         </div>
       ) : (
         <section className="menu-bg">
-          {menuItems.map((item,index) => 
-          (
-            <FoodItemCard 
-            id={item._id}
-            image={item.image_src}
-            name={item.name}
-            price={item.price}
-            index={index}
-            item={item} 
-            key={index}
-            />
-          ))}
+          <div className="categories-bg">
+            <h1 className="categories-heading">Categories</h1>
+            <div className="categories-cards-div">
+              {categories.map(({ id, icon, title }) => (
+                <CategoryCard key={id} icon={icon} title={title} />
+              ))}
+            </div>
+          </div>
+          <div className="menu-div">
+            {filteredMenu.length > 0
+              ? filteredMenu.map((item, index) => (
+                  <FoodItemCard
+                    id={item._id}
+                    image={item.imageUrl}
+                    name={item.name}
+                    price={item.price}
+                    index={index}
+                    item={item}
+                    key={index}
+                  />
+                ))
+              : menuItems.map((item, index) => (
+                  <FoodItemCard
+                    id={item._id}
+                    image={item.imageUrl}
+                    name={item.name}
+                    price={item.price}
+                    index={index}
+                    item={item}
+                    key={index}
+                  />
+                ))}
+          </div>
         </section>
       )}
       <Footer />

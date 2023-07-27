@@ -29,6 +29,41 @@ const Cart = () => {
       toast.success('Item removed from cart');
   }
 
+  const handleIncrement = (e) => {
+    console.log(e.target.id,'id of item to be incremented')
+    const incrementId = e.target.id;
+    let updatedCart = cartItems.map((item)=>{
+      if(item._id === incrementId){
+        item.quantity = item.quantity + 1;
+        return item;
+      }
+      return item;
+    })
+    console.log(updatedCart,'updatedCart after incrementing item')
+    setCartItems(updatedCart);
+    localStorage.setItem('cartData',JSON.stringify(updatedCart));
+  }
+
+
+  const handleDecrement = (e) => {
+    console.log(e.target.id,'id of item to be decremented')
+    const decrementId = e.target.id;
+    let updatedCart = cartItems.map((item)=>{
+      if(item._id === decrementId){
+        if(item.quantity > 1){
+          item.quantity = item.quantity - 1;
+          return item;
+        }
+      }
+      return item;
+    })
+    console.log(updatedCart,'updatedCart after decrementing item')
+    setCartItems(updatedCart);
+    localStorage.setItem('cartData',JSON.stringify(updatedCart));
+  }
+
+
+
   const calcTotalPrice = async () => {
     let prices = await cartData.map((currentProduct) => {
       const { price, quantity } = currentProduct;
@@ -69,15 +104,19 @@ const Cart = () => {
         ) : (
           <div className="cart-bg-div">
             <div className="cart-items-div-bg">
-              {cartData.map(({ _id, image_src, name, price, quantity}) => (
+              {cartData.map(({ _id, imageUrl, name, price, quantity}) => (
                 <div className="cart-item-div" key={_id}>
                   <div className="cart-item-img-div">
-                    <img src={image_src} alt={"product-img"} />
+                    <img src={imageUrl} alt={"product-img"} />
                   </div>
                   <div className="cart-item-details-div">
                     <h4 className="cart-item-name">Name: {name}</h4>
                     <p className="cart-item-price">Price: ${price}</p>
-                    <p className="cart-item-quantity">Quantity: {quantity}</p>
+                    <div className="cart-item-quantity-div">Quantity: 
+                    <button onClick={handleDecrement} id={_id}>-</button>
+                    <span> {quantity} </span>
+                    <button onClick={handleIncrement} id={_id}>+</button>
+                    </div>
                     <button className="remove-btn" onClick={handleRemove} id={_id}>Remove</button>
                   </div>
                 </div>

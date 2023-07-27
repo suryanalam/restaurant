@@ -2,7 +2,9 @@ import "./Header.css";
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import Badge from "@mui/material/Badge";
+import IconButton from "@mui/material/IconButton";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ const Header = () => {
     payload = JSON.parse(atob(tokenData.split(".")[1]));
   }
 
+  const cartData = JSON.parse(localStorage.getItem("cartData"));
   const handleLogout = async () => {
     await localStorage.removeItem("token");
     toast.success("Logged out successfully");
@@ -39,11 +42,16 @@ const Header = () => {
       <section className="header-profile-div">
         <p>Welcome,{payload.name}</p>
         <div className="header-cart-icon">
-          <ShoppingCartRoundedIcon sx={{ fontSize: 25 }} 
-            onClick={()=>navigate("/cart")}
-          />
+          <IconButton aria-label="cart">
+            <Badge badgeContent={cartData?.length} sx={{color:'var(--white)'}} >
+              <ShoppingCartIcon
+                sx={{ fontSize: 25, color: "var(--white)" }}
+                onClick={() => navigate("/cart")}
+              />
+            </Badge>
+          </IconButton>
         </div>
-        <button className="logout-btn" onClick={handleLogout} >
+        <button className="logout-btn" onClick={handleLogout}>
           Logout
         </button>
       </section>

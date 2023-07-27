@@ -9,10 +9,13 @@ export const useFetch = (url) => {
     const fetchData = async () => {
       try {
         let resData = await axios.get(url);
-        console.log("response from api", resData);
+        console.log("response from api", resData.data.data);
 
         if (resData.status === 200) {
-          setMenuItems(resData.data.items);
+          setMenuItems(resData.data.data);
+        }
+        else{
+          setMenuItems([]);
         }
       } catch (err) {
         console.log(err,'while fetching data from api');

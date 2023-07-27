@@ -14,7 +14,7 @@ const FoodItemCard = ({item, id, image, name, price}) => {
 
     if(cartData){
 
-      console.log('cartData is available in localstorage');
+        console.log('cartData is available in localstorage');
 
         let itemExist = cartItems.find((item)=>{
           if(item._id === id){
